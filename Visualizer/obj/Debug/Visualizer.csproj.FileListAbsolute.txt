@@ -1,8 +1,0 @@
-C:\Users\Валерий\Documents\ForestInhabitants\Visualizer\bin\Debug\Visualizer.exe.config
-C:\Users\Валерий\Documents\ForestInhabitants\Visualizer\bin\Debug\Visualizer.exe
-C:\Users\Валерий\Documents\ForestInhabitants\Visualizer\bin\Debug\Visualizer.pdb
-C:\Users\Валерий\Documents\ForestInhabitants\Visualizer\bin\Debug\ForestInhabitants.exe
-C:\Users\Валерий\Documents\ForestInhabitants\Visualizer\bin\Debug\ForestInhabitants.pdb
-C:\Users\Валерий\Documents\ForestInhabitants\Visualizer\obj\Debug\Visualizer.csprojResolveAssemblyReference.cache
-C:\Users\Валерий\Documents\ForestInhabitants\Visualizer\obj\Debug\Visualizer.exe
-C:\Users\Валерий\Documents\ForestInhabitants\Visualizer\obj\Debug\Visualizer.pdb

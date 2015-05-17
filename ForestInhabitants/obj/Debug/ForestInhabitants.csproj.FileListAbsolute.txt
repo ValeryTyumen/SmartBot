@@ -1,8 +1,0 @@
-C:\Users\Валерий\Documents\ForestInhabitants\ForestInhabitants\bin\Debug\ForestInhabitants.exe.config
-C:\Users\Валерий\Documents\ForestInhabitants\ForestInhabitants\bin\Debug\ForestInhabitants.exe
-C:\Users\Валерий\Documents\ForestInhabitants\ForestInhabitants\bin\Debug\ForestInhabitants.pdb
-C:\Users\Валерий\Documents\ForestInhabitants\ForestInhabitants\bin\Debug\nunit.framework.dll
-C:\Users\Валерий\Documents\ForestInhabitants\ForestInhabitants\bin\Debug\nunit.framework.xml
-C:\Users\Валерий\Documents\ForestInhabitants\ForestInhabitants\obj\Debug\ForestInhabitants.exe
-C:\Users\Валерий\Documents\ForestInhabitants\ForestInhabitants\obj\Debug\ForestInhabitants.pdb
-C:\Users\Валерий\Documents\ForestInhabitants\ForestInhabitants\obj\Debug\ForestInhabitants.csprojResolveAssemblyReference.cache
