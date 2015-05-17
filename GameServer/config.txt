@@ -1,0 +1,7 @@
+﻿{
+  "ForestSource": "forest.txt",
+  "Aim": {
+    "X": 8,
+    "Y": 5
+  }
+}

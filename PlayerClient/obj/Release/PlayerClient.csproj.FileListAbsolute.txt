@@ -1,0 +1,15 @@
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Release\forest.txt
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Release\PlayerClient.exe.config
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Release\PlayerClient.exe
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Release\PlayerClient.pdb
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Release\ForestInhabitants.exe
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Release\GameServer.exe
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Release\Visualizer.exe
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Release\Newtonsoft.Json.dll
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Release\ForestInhabitants.pdb
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Release\Visualizer.pdb
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Release\GameServer.pdb
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Release\Newtonsoft.Json.xml
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\obj\Release\PlayerClient.csprojResolveAssemblyReference.cache
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\obj\Release\PlayerClient.exe
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\obj\Release\PlayerClient.pdb

@@ -1,0 +1,13 @@
+C:\Users\Валерий\Documents\ForestInhabitants\TestForestInhabitants\bin\Debug\TestForests\forest.txt
+C:\Users\Валерий\Documents\ForestInhabitants\TestForestInhabitants\bin\Debug\TestForests\forest1.txt
+C:\Users\Валерий\Documents\ForestInhabitants\TestForestInhabitants\bin\Debug\TestForests\forest2.txt
+C:\Users\Валерий\Documents\ForestInhabitants\TestForestInhabitants\bin\Debug\TestForestInhabitants.exe.config
+C:\Users\Валерий\Documents\ForestInhabitants\TestForestInhabitants\bin\Debug\TestForestInhabitants.exe
+C:\Users\Валерий\Documents\ForestInhabitants\TestForestInhabitants\bin\Debug\TestForestInhabitants.pdb
+C:\Users\Валерий\Documents\ForestInhabitants\TestForestInhabitants\bin\Debug\ForestInhabitants.exe
+C:\Users\Валерий\Documents\ForestInhabitants\TestForestInhabitants\bin\Debug\nunit.framework.dll
+C:\Users\Валерий\Documents\ForestInhabitants\TestForestInhabitants\bin\Debug\ForestInhabitants.pdb
+C:\Users\Валерий\Documents\ForestInhabitants\TestForestInhabitants\bin\Debug\nunit.framework.xml
+C:\Users\Валерий\Documents\ForestInhabitants\TestForestInhabitants\obj\Debug\TestForestInhabitants.csprojResolveAssemblyReference.cache
+C:\Users\Валерий\Documents\ForestInhabitants\TestForestInhabitants\obj\Debug\TestForestInhabitants.exe
+C:\Users\Валерий\Documents\ForestInhabitants\TestForestInhabitants\obj\Debug\TestForestInhabitants.pdb

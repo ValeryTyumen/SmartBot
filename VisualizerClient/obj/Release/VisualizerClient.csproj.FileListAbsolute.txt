@@ -1,0 +1,15 @@
+C:\Users\Валерий\Documents\ForestInhabitants\VisualizerClient\bin\Release\VisualizerClient.exe.config
+C:\Users\Валерий\Documents\ForestInhabitants\VisualizerClient\bin\Release\forest.txt
+C:\Users\Валерий\Documents\ForestInhabitants\VisualizerClient\bin\Release\VisualizerClient.exe
+C:\Users\Валерий\Documents\ForestInhabitants\VisualizerClient\bin\Release\VisualizerClient.pdb
+C:\Users\Валерий\Documents\ForestInhabitants\VisualizerClient\bin\Release\ForestInhabitants.exe
+C:\Users\Валерий\Documents\ForestInhabitants\VisualizerClient\bin\Release\GameServer.exe
+C:\Users\Валерий\Documents\ForestInhabitants\VisualizerClient\bin\Release\Visualizer.exe
+C:\Users\Валерий\Documents\ForestInhabitants\VisualizerClient\bin\Release\Newtonsoft.Json.dll
+C:\Users\Валерий\Documents\ForestInhabitants\VisualizerClient\bin\Release\ForestInhabitants.pdb
+C:\Users\Валерий\Documents\ForestInhabitants\VisualizerClient\bin\Release\Visualizer.pdb
+C:\Users\Валерий\Documents\ForestInhabitants\VisualizerClient\bin\Release\GameServer.pdb
+C:\Users\Валерий\Documents\ForestInhabitants\VisualizerClient\bin\Release\Newtonsoft.Json.xml
+C:\Users\Валерий\Documents\ForestInhabitants\VisualizerClient\obj\Release\VisualizerClient.csprojResolveAssemblyReference.cache
+C:\Users\Валерий\Documents\ForestInhabitants\VisualizerClient\obj\Release\VisualizerClient.exe
+C:\Users\Валерий\Documents\ForestInhabitants\VisualizerClient\obj\Release\VisualizerClient.pdb

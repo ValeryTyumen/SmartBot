@@ -1,0 +1,12 @@
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Debug\PlayerClient.exe.config
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Debug\PlayerClient.exe
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Debug\PlayerClient.pdb
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Debug\ForestInhabitants.exe
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Debug\NetworkHelpers.exe
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Debug\ForestInhabitants.pdb
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Debug\NetworkHelpers.pdb
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\obj\Debug\PlayerClient.csprojResolveAssemblyReference.cache
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\obj\Debug\PlayerClient.exe
+C:\Users\Валерий\Documents\ForestInhabitants\PlayerClient\obj\Debug\PlayerClient.pdb
