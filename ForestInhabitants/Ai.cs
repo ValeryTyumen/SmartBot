@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace ForestInhabitants
 {
+    /// <summary>
+    /// Ai
+    /// </summary>
 	public class Ai : IAi
 	{
 		private static readonly Dictionary<Point, Direction> Directions = new Dictionary<Point, Direction>()
