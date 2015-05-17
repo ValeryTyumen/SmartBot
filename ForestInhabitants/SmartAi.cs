@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ForestInhabitants
 {
 	public class SmartAi
 	{
+		private Point EnemyLocation;
 
+		public IEnumerable<Direction> Find(Inhabitant inhabitant, Point aim, Point forestDimensions)
+		{
+
+		}
 	}
 }
