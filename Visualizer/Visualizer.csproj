@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicDrawer.cs" />
     <Compile Include="Controller.cs" />
+    <Compile Include="ForestDrawer.cs" />
     <Compile Include="ForestView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

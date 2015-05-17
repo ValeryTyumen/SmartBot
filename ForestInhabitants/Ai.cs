@@ -1,52 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ForestInhabitants
 {
-	internal class Unknown : Terrain
-	{
-		public Unknown()
-		{
-			Name = "Unknown";
-		}
-
-		public override MovementResult Interact(Inhabitant inhabitant, Direction direction)
-		{
-			//doesn't matter
-			return new MovementResult(this, Direction.Stay);
-		}
-	}
-
-	public class PathFinder
-	{
-		public event Action Moved;
-		private readonly IAi _ai;
-
-		public PathFinder(IAi ai)
-		{
-			_ai = ai;
-			Moved = () => { };
-		}
-
-		public void Find(Forest forest, Inhabitant inhabitant, Point aim)
-		{
-			var dimensions = new Point(forest.Area[0].Length, forest.Area.Length);
-			foreach (var direction in _ai.Find(inhabitant, aim, dimensions))
-			{
-				forest.Move(inhabitant, direction);
-				Moved();
-			}
-		}
-	}
-
-	public interface IAi
-	{
-		IEnumerable<Direction> Find(Inhabitant inhabitant, Point aim, Point forestDimensions);
-	}
-
 	public class Ai : IAi
 	{
 		private static readonly Dictionary<Point, Direction> Directions = new Dictionary<Point, Direction>()
