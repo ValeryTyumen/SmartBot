@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Answer.cs" />
-    <Compile Include="Bson.cs" />
+    <Compile Include="Json.cs" />
     <Compile Include="CellChange.cs" />
     <Compile Include="ClientInfo.cs" />
     <Compile Include="Hello.cs" />

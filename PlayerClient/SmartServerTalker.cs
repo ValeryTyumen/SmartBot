@@ -34,7 +34,7 @@ namespace PlayerClient
 
 		public void CommunicateWithServer(string nickname, Socket socket)
 		{
-			var clientInfo = Bson.Read<ClientInfo>(socket);
+			var clientInfo = Json.Read<ClientInfo>(socket);
 			Console.WriteLine("Got client info.");
 			var inhabitant = new Inhabitant(nickname, clientInfo.Hp, clientInfo.StartPosition);
 			IAi ai = new SmartAi(inhabitant, clientInfo.Target, clientInfo.MapSize);
@@ -42,11 +42,11 @@ namespace PlayerClient
 			while (true)
 			{
 				var direction = ai.MakeStep();
-				Bson.Write(socket, new Move
+				Json.Write(socket, new Move
 				{
 					Direction = direction
 				});
-				var moveResultInfo = Bson.Read<MoveResultInfo>(socket);
+				var moveResultInfo = Json.Read<MoveResultInfo>(socket);
 				if (moveResultInfo.Result == 0)
 					inhabitant.Location = inhabitant.Location.Add(Forest.Movings[direction]);
 				if (moveResultInfo.Result == 2)

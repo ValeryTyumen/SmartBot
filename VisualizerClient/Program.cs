@@ -51,8 +51,8 @@ namespace VisualizerClient
 			Console.WriteLine("Connected to server.");
 			_view = new ForestView(new BasicDrawer());
 			var socket = client.Client;
-			Bson.Write(socket, new Hello {IsVisualizator = true});
-			var worldInfo = Bson.Read<WorldInfo>(socket);
+			Json.Write(socket, new Hello {IsVisualizator = true});
+			var worldInfo = Json.Read<WorldInfo>(socket);
 			_inhabitants = new List<Inhabitant>();
 			foreach (var player in worldInfo.Players)
 			{

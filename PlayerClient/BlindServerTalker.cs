@@ -9,17 +9,17 @@ namespace PlayerClient
 	{
 		public void CommunicateWithServer(string nickname, Socket socket)
 		{
-			var clientInfo = Bson.Read<ClientInfo>(socket);
+			var clientInfo = Json.Read<ClientInfo>(socket);
 			Console.WriteLine("Got client info.");
 			var inhabitant = new Inhabitant(nickname, clientInfo.Hp, clientInfo.StartPosition);
 			IBlindAi blindAi = new BlindAi();
 			foreach (var direction in blindAi.Find(inhabitant, clientInfo.Target, clientInfo.MapSize))
 			{
-				Bson.Write(socket, new Move
+				Json.Write(socket, new Move
 				{
 					Direction = direction
 				});
-				var moveResultInfo = Bson.Read<MoveResultInfo>(socket);
+				var moveResultInfo = Json.Read<MoveResultInfo>(socket);
 				if (moveResultInfo.Result == 0)
 				{
 					inhabitant.Location = inhabitant.Location.Add(Forest.Movings[direction]);
