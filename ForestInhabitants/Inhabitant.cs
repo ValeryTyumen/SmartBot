@@ -2,7 +2,7 @@
 {
 	public class Inhabitant : ICell
 	{
-		private const int StartHealth = 10;
+		private const int StartHealth = 2;
 		public string Name { get; private set; }
 		public int Health { get; set; }
 		public Point Location

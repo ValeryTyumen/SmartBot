@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IServerTalker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServerTalker.cs" />
+    <Compile Include="BlindServerTalker.cs" />
+    <Compile Include="SmartServerTalker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

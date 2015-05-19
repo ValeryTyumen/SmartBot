@@ -68,7 +68,7 @@ namespace ForestInhabitants
 				var current = queue.Dequeue();
 				if (finishCondition(current))
 					return parents;
-				foreach (var neighbor in GetNeighbors(current, addCondition))
+				foreach (var neighbor in GetNeighbors(current, n => addCondition(n) && ! parents.ContainsKey(n)))
 				{
 					queue.Enqueue(neighbor);
 					parents[neighbor] = current;
@@ -118,7 +118,10 @@ namespace ForestInhabitants
 				{
 					return GetPathFromParents(current, parents);
 				}
-				foreach (var neighbor in GetNeighbors(current.Item1, n => _area[n.Y][n.X].Name != "PathOrTrap"))
+				foreach (var neighbor in GetNeighbors(current.Item1, p => 
+					_area[p.Y][p.X] != null 
+					&& _area[p.Y][p.X].Name != "Bush" 
+					&& _area[p.Y][p.X].Name != "PathOrTrap"))
 				{
 					var trapsPassed = current.Item2;
 					if (_area[neighbor.Y][neighbor.X].Name == "Trap")
@@ -171,8 +174,8 @@ namespace ForestInhabitants
 		{
 			for (int i = StepIndex + 1; i < CurrentPath.Count; i++)
 				if (_area[CurrentPath[i].Y][CurrentPath[i].X].Name == "PathOrTrap")
-					return false;
-			return true;
+					return true;
+			return false;
 		}
 
 		private Point ChooseSubAim()
@@ -196,6 +199,17 @@ namespace ForestInhabitants
 
 		public Direction MakeStep()
 		{
+			if (_inhabitant.Location.Equals(_aim))
+				return Direction.Stay;
+			if (CurrentPath != null)
+			{
+				if (! CurrentPath[StepIndex].Equals(_inhabitant.Location))
+				{
+				}
+			}
+			if (_lifeAim != null)
+				if (_inhabitant.Location.Equals(_lifeAim) || LifeUnreachable())
+					_lifeAim = null;
 			if (_lifeAim == null)
 			{
 				var path = FindPathToLifeNear();
@@ -205,16 +219,6 @@ namespace ForestInhabitants
 					StepIndex = 0;
 					_lifeAim = path[path.Count - 1];
 					_subAim = null;
-				}
-			}
-			if (_lifeAim != null)
-			{
-				if (_inhabitant.Location.Equals(_lifeAim) || LifeUnreachable())
-					_lifeAim = null;
-				else
-				{
-					StepIndex++;
-					return Forest.Directions[CurrentPath[StepIndex].Substract(CurrentPath[StepIndex - 1])];
 				}
 			}
 			if (_lifeAim == null)
@@ -228,11 +232,9 @@ namespace ForestInhabitants
 					CurrentPath = FindShortestPathWithMinTraps(_inhabitant.Location, _subAim); //can create mistake
 					StepIndex = 0;
 				}
-				StepIndex++;
-				return Forest.Directions[CurrentPath[StepIndex].Substract(CurrentPath[StepIndex - 1])];
 			}
-			//This place should be never executed
-			return Direction.Stay;
+			StepIndex++;
+			return Forest.Directions[CurrentPath[StepIndex].Substract(CurrentPath[StepIndex - 1])];
 		}
 
 		private void UpdateArea(Terrain[][] visibleArea)
@@ -255,20 +257,16 @@ namespace ForestInhabitants
 				}
 		}
 
-		private bool IsInterestingPoint(int x, int y)
+		private bool IsBorderPoint(int x, int y)
 		{
-			var dx = new[] { 0, 1, 0, -1 };
-			var dy = new[] { 1, 0, -1, 0 };
-			for (int i = 0; i < 4; i++)
-				if (InsideArea(x + dx[i], y + dy[i]) && _area[y + dy[i]][x + dx[i]] == null)
-					return true;
-			return false;
+			return GetNeighbors(new Point(x, y), v => _area[v.Y][v.X] == null).Count() != 0;
 		}
 
 		private void UpdatePointsOfInterest(Terrain[][] visibleArea)
 		{
-			var highInterestBuffer = PointsOfHighInterest;
+			var buffer = PointsOfHighInterest;
 			PointsOfHighInterest = new HashSet<Point>();
+			PointsOfHighInterest.Add(_aim);
 			var warFog = visibleArea.Length / 2;
 			var parents = BreadsFirstSearch(_inhabitant.Location, v =>
 			{
@@ -283,12 +281,17 @@ namespace ForestInhabitants
 				{
 					var yOnArea = _inhabitant.Location.Y - warFog + y;
 					var xOnArea = _inhabitant.Location.X - warFog + x;
-					if (InsideArea(xOnArea, yOnArea) && parents[new Point(xOnArea, yOnArea)] != null &&
-							(IsInterestingPoint(xOnArea, yOnArea) || _aim.Equals(new Point(xOnArea, yOnArea))))
+					if (InsideArea(xOnArea, yOnArea) && parents.ContainsKey(new Point(xOnArea, yOnArea)) &&
+							(IsBorderPoint(xOnArea, yOnArea)))
 						PointsOfHighInterest.Add(new Point(xOnArea, yOnArea));
 				}
-			foreach (var point in highInterestBuffer)
+			foreach (var point in buffer)
 				if (! PointsOfHighInterest.Contains(point))
+					PointsOfInterest.Add(point);
+			buffer = PointsOfInterest;
+			PointsOfInterest = new HashSet<Point>();
+			foreach (var point in buffer)
+				if (IsBorderPoint(point.X, point.Y))
 					PointsOfInterest.Add(point);
 		}
 
