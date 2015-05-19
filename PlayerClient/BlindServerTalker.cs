@@ -5,23 +5,15 @@ using NetworkHelpers;
 
 namespace PlayerClient
 {
-	internal class ServerTalker
+	internal class BlindServerTalker : IServerTalker
 	{
-		private Inhabitant _inhabitant;
-
-		public ServerTalker(Inhabitant inhabitant)
-		{
-			_inhabitant = inhabitant;
-		}
-
-		public void CommunicateWithServer(Socket socket)
+		public void CommunicateWithServer(string nickname, Socket socket)
 		{
 			var clientInfo = Bson.Read<ClientInfo>(socket);
 			Console.WriteLine("Got client info.");
-
-			_inhabitant.Location = clientInfo.StartPosition;
+			var inhabitant = new Inhabitant(nickname, clientInfo.Hp, clientInfo.StartPosition);
 			IBlindAi blindAi = new BlindAi();
-			foreach (var direction in blindAi.Find(_inhabitant, clientInfo.Target, clientInfo.MapSize))
+			foreach (var direction in blindAi.Find(inhabitant, clientInfo.Target, clientInfo.MapSize))
 			{
 				Bson.Write(socket, new Move
 				{
@@ -30,7 +22,7 @@ namespace PlayerClient
 				var moveResultInfo = Bson.Read<MoveResultInfo>(socket);
 				if (moveResultInfo.Result == 0)
 				{
-					_inhabitant.Location = _inhabitant.Location.Add(Forest.Movings[direction]);
+					inhabitant.Location = inhabitant.Location.Add(Forest.Movings[direction]);
 				}
 				if (moveResultInfo.Result == 2)
 					break;

@@ -6,7 +6,7 @@ namespace ForestInhabitants
 {
 	public interface IAi
 	{
-		void ReceiveMoveResult(Terrain[][] visibleArea, Point visibleEnemyLocation);
+		void ReceiveMoveResult(Terrain[][] visibleArea);
 		Direction MakeStep();
 	}
 
@@ -292,7 +292,7 @@ namespace ForestInhabitants
 					PointsOfInterest.Add(point);
 		}
 
-		public void ReceiveMoveResult(Terrain[][] visibleArea, Point visibleEnemyLocation)
+		public void ReceiveMoveResult(Terrain[][] visibleArea)
 		{
 			UpdateArea(visibleArea);
 			UpdatePointsOfInterest(visibleArea);

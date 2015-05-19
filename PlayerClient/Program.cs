@@ -25,7 +25,7 @@ namespace PlayerClient
 
 		static void Main(string[] args)
 		{
-			_inhabitant = new Inhabitant("Spider-man");
+			var nickname = "Spider-man";
 			var addressTuple = ParseArgs(args);
 			var client = new TcpClient();
 			try
@@ -42,9 +42,10 @@ namespace PlayerClient
 			Bson.Write(socket, new Hello
 			{
 				IsVisualizator = false,
-				Name = _inhabitant.Name
+				Name = nickname
 			});
-			new ServerTalker(_inhabitant).CommunicateWithServer(socket);
+			//new BlindServerTalker().CommunicateWithServer(nickname, socket);
+			new SmartServerTalker().CommunicateWithServer(nickname, socket);
 		}
 	}
 }

@@ -6,6 +6,7 @@ namespace NetworkHelpers
 		Path,
 		Bush,
 		Trap,
-		Life
+		Life,
+		PathOrTrap
 	}
 }

@@ -15,7 +15,7 @@ namespace GameServer
 		private static Forest _forest;
 		private static Point _aim;
 		private static bool GameOver = false;
-		private static readonly int WarFog = 1;
+		private static readonly int WarFog = 2;
 		private static readonly int MaxInhabitantCount = 2;
 		private static object _locker = new object();
 
@@ -144,7 +144,7 @@ namespace GameServer
 					new PlayerTalker(
 						_forest, 
 						_aim, 
-						MaxInhabitantCount, 
+						WarFog, 
 						_players, 
 						_locker, 
 						_cellChanges, 

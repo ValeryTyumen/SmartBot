@@ -10,7 +10,7 @@ namespace GameServer
 	{
 		private readonly Forest _forest;
 		private readonly Point _aim;
-		private readonly int _maxInhabitantCount;
+		private readonly int _warFog;
 		private readonly List<RemotePlayer> _players;
 		private readonly object _locker;
 		private readonly List<CellChange> _cellChanges;
@@ -20,7 +20,7 @@ namespace GameServer
 		public PlayerTalker(
 			Forest forest,
 			Point aim,
-			int maxInhabitantCount,
+			int warFog,
 			List<RemotePlayer> players,
 			object locker,
 			List<CellChange> cellChanges,
@@ -30,7 +30,7 @@ namespace GameServer
 		{
 			_forest = forest;
 			_aim = aim;
-			_maxInhabitantCount = maxInhabitantCount;
+			_warFog = warFog;
 			_players = players;
 			_locker = locker;
 			_cellChanges = cellChanges;
@@ -40,11 +40,11 @@ namespace GameServer
 
 		private TerrainType[,] GetVisibleArea(Point location)
 		{
-			var area = new TerrainType[_maxInhabitantCount * 2 + 1, _maxInhabitantCount * 2 + 1];
-			var yMin = location.Y - _maxInhabitantCount;
-			var yMax = location.Y + _maxInhabitantCount;
-			var xMin = location.X - _maxInhabitantCount;
-			var xMax = location.X + _maxInhabitantCount;
+			var area = new TerrainType[_warFog * 2 + 1, _warFog * 2 + 1];
+			var yMin = location.Y - _warFog;
+			var yMax = location.Y + _warFog;
+			var xMin = location.X - _warFog;
+			var xMax = location.X + _warFog;
 			for (var i = yMin; i <= yMax; i++)
 				for (var j = xMin; j <= xMax; j++)
 				{
@@ -53,6 +53,15 @@ namespace GameServer
 						code = Program.TerrainCode[_forest.Area[i][j].Name];
 					area[i - yMin, j - xMin] = code;
 				}
+			foreach (var player in _players)
+			{
+				if (player.Inhabitant.Location.InNeighborhood(location, _warFog)
+				    && ! player.Inhabitant.Location.Equals(location))
+				{
+					var enemy = player.Inhabitant.Location;
+					area[enemy.Y - yMin, enemy.X - xMin] = TerrainType.PathOrTrap;
+				}
+			}
 			return area;
 		}
 
