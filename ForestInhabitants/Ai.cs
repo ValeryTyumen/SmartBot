@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace ForestInhabitants
 {
+    /// <summary>
+    /// Ai
+    /// </summary>
 	public class Ai : IAi
 	{
 		private static readonly Dictionary<Point, Direction> Directions = new Dictionary<Point, Direction>()
