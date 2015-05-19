@@ -48,14 +48,15 @@
     <Compile Include="Direction.cs" />
     <Compile Include="Forest.cs" />
     <Compile Include="ForestLoader.cs" />
-    <Compile Include="IAi.cs" />
+    <Compile Include="IBlindAi.cs" />
     <Compile Include="ICell.cs" />
     <Compile Include="Inhabitant.cs" />
-    <Compile Include="Ai.cs" />
+    <Compile Include="BlindAi.cs" />
     <Compile Include="Life.cs" />
     <Compile Include="MovementResult.cs" />
     <Compile Include="Path.cs" />
     <Compile Include="PathFinder.cs" />
+    <Compile Include="PathOrTrap.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

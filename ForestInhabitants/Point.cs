@@ -1,3 +1,5 @@
+using System;
+
 namespace ForestInhabitants
 {
 	public class Point
@@ -42,6 +44,21 @@ namespace ForestInhabitants
 		public override int GetHashCode()
 		{
 			return X.GetHashCode() ^ Y.GetHashCode();
+		}
+
+		public bool InNeighborhood(Point point, int radius)
+		{
+			return Math.Abs(X - point.X) <= radius && Math.Abs(Y - point.Y) <= radius;
+		}
+
+		public static int GetSquaredDistance(Point point1, Point point2)
+		{
+			return (point1.X - point2.X) * (point1.X - point2.X) + (point1.Y - point2.Y) * (point1.Y - point2.Y);
+		}
+
+		public static int GetManhattanDistance(Point point1, Point point2)
+		{
+			return Math.Abs(point1.X - point2.X) + Math.Abs(point1.Y - point2.Y);
 		}
 	}
 }

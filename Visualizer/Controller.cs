@@ -18,7 +18,7 @@ namespace Visualizer
 
 	    private static void FindPath(Forest forest, Inhabitant inhabitant, ForestView view)
 	    {
-		    var pathFinder = new PathFinder(new Ai());
+		    var pathFinder = new PathFinder(new BlindAi());
 			pathFinder.Moved += () => { 
 				view.Repaint(forest, new [] { inhabitant });
 				Thread.Sleep(20);

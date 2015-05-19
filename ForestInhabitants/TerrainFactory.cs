@@ -4,4 +4,12 @@ namespace ForestInhabitants
 	{
 		abstract public Terrain Create();
 	}
+
+	public class TerrainFactory<T> : TerrainFactory where T : Terrain, new()
+	{
+		public override Terrain Create()
+		{
+			return new T();
+		}
+	}
 }

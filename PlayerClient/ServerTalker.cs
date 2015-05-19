@@ -20,8 +20,8 @@ namespace PlayerClient
 			Console.WriteLine("Got client info.");
 
 			_inhabitant.Location = clientInfo.StartPosition;
-			IAi ai = new Ai();
-			foreach (var direction in ai.Find(_inhabitant, clientInfo.Target, clientInfo.MapSize))
+			IBlindAi blindAi = new BlindAi();
+			foreach (var direction in blindAi.Find(_inhabitant, clientInfo.Target, clientInfo.MapSize))
 			{
 				Bson.Write(socket, new Move
 				{

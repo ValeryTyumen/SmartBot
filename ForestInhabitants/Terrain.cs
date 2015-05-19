@@ -11,12 +11,4 @@ namespace ForestInhabitants
         public string Name;
         public abstract MovementResult Interact(Inhabitant inhabitant, Direction direction);
     }
-
-	public class TerrainFactory<T> : TerrainFactory where T : Terrain, new()
-    {
-        public override Terrain Create()
-        {
-            return new T();
-        }
-    }
 }

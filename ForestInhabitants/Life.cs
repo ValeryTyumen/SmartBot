@@ -10,7 +10,7 @@ namespace ForestInhabitants
 		public override MovementResult Interact(Inhabitant inhabitant, Direction direction)
 		{
 			var result = new MovementResult(new Path(), direction);
-			inhabitant.Health++;
+			inhabitant.IncreaseHealth();
 			return result;
 		}
 	}

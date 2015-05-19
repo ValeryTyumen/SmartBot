@@ -11,7 +11,7 @@ namespace TestForestInhabitants
 			var forest = ForestLoader.Load(filename);
 			var inhabitant = new Inhabitant("Spider-man");
 			forest.Place(inhabitant, inhabitantLocation.X, inhabitantLocation.Y);
-			var finder = new PathFinder(new Ai());
+			var finder = new PathFinder(new BlindAi());
 			finder.Find(forest, inhabitant, aim);
 			Assert.AreEqual(aim, inhabitant.Location);
 		}
