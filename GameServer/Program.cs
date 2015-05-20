@@ -76,10 +76,10 @@ namespace GameServer
 
 		private static void WriteWorldInfo(Socket socket)
 		{
-			var map = new TerrainType[_forest.Area.Length, _forest.Area[0].Length];
+			var map = new int[_forest.Area.Length, _forest.Area[0].Length];
 			for (var i = 0; i < _forest.Area.Length; i++)
 				for (var j = 0; j < _forest.Area[0].Length; j++)
-					map[i, j] = TerrainCode[_forest.Area[i][j].Name];
+					map[i, j] = (int)TerrainCode[_forest.Area[i][j].Name];
 			var worldInfo = new WorldInfo
 			{
 				Players = Enumerable

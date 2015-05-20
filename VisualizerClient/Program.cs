@@ -64,7 +64,7 @@ namespace VisualizerClient
 				.Range(0, worldInfo.Map.GetLength(0))
 				.Select(i => Enumerable
 					.Range(0, worldInfo.Map.GetLength(1))
-					.Select(j => _factories[worldInfo.Map[i, j]].Create())
+					.Select(j => _factories[(TerrainType)worldInfo.Map[i, j]].Create())
 					.ToArray())
 				.ToArray();
 			_forest = new Forest(area);
