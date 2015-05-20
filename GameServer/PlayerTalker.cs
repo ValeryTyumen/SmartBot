@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using System.Security.Cryptography.X509Certificates;
 using ForestInhabitants;
 using NetworkHelpers;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace GameServer
 {
@@ -38,9 +41,9 @@ namespace GameServer
 			_onGameOver = onGameOver;
 		}
 
-		private TerrainType[,] GetVisibleArea(Point location)
+		private int[,] GetVisibleArea(Point location)
 		{
-			var area = new TerrainType[_warFog * 2 + 1, _warFog * 2 + 1];
+			var area = new int[_warFog * 2 + 1, _warFog * 2 + 1];
 			var yMin = location.Y - _warFog;
 			var yMax = location.Y + _warFog;
 			var xMin = location.X - _warFog;
@@ -51,7 +54,7 @@ namespace GameServer
 					var code = TerrainType.None;
 					if (i > 0 && j > 0 && i < _forest.Area.Length && j < _forest.Area[0].Length)
 						code = Program.TerrainCode[_forest.Area[i][j].Name];
-					area[i - yMin, j - xMin] = code;
+					area[i - yMin, j - xMin] = (int)code;
 				}
 			foreach (var player in _players)
 			{
@@ -59,7 +62,7 @@ namespace GameServer
 				    && ! player.Inhabitant.Location.Equals(location))
 				{
 					var enemy = player.Inhabitant.Location;
-					area[enemy.Y - yMin, enemy.X - xMin] = TerrainType.PathOrTrap;
+					area[enemy.Y - yMin, enemy.X - xMin] = (int)TerrainType.PathOrTrap;
 				}
 			}
 			return area;

@@ -17,17 +17,17 @@ namespace PlayerClient
 			{TerrainType.PathOrTrap, new TerrainFactory<PathOrTrap>()}
 		};
 
-		private Terrain[][] Convert(TerrainType[,] visibleMap)
+		private Terrain[][] Convert(int[,] visibleMap)
 		{
 			var result = new Terrain[visibleMap.GetLength(0)][];
 			for (var i = 0; i < visibleMap.GetLength(0); i++)
 			{
 				result[i] = new Terrain[visibleMap.GetLength(1)];
 				for (var j = 0; j < visibleMap.GetLength(1); j++)
-					if (visibleMap[i, j] == TerrainType.None)
+					if (visibleMap[i, j] == (int)TerrainType.None)
 						result[i][j] = null;
 					else
-						result[i][j] = factories[visibleMap[i, j]].Create();
+						result[i][j] = factories[(TerrainType)visibleMap[i, j]].Create();
 			}
 			return result;
 		}
