@@ -17,7 +17,7 @@ namespace PlayerClient
 			{
 				Json.Write(socket, new Move
 				{
-					Direction = direction
+					Direction = (int)direction
 				});
 				var moveResultInfo = Json.Read<MoveResultInfo>(socket);
 				if (moveResultInfo.Result == 0)

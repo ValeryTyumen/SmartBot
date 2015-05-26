@@ -109,7 +109,7 @@ namespace GameServer
 				MovementResult result;
 				lock (_locker)
 				{
-					result = _forest.Move(_players[id].Inhabitant, move.Direction);
+					result = _forest.Move(_players[id].Inhabitant, (Direction)move.Direction);
 					if (result.Direction != Direction.Stay)
 						_playerStateChanges.Add(
                             new Tuple<int, Point, int>(
