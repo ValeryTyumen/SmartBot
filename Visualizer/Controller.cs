@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Collections.Generic;
+using System.Linq;
 using ForestInhabitants;
 
 namespace Visualizer
@@ -10,12 +11,14 @@ namespace Visualizer
 		static void Main(string[] args)
 		{
 			var forest = ForestLoader.Load("forest.txt");
-			var inhabitant = new Inhabitant("Spider-man", 3, null);
-			forest.Place(inhabitant, 1, 1);
-			var aim = new Point(28, 26);
+			var inhabitant1 = new Inhabitant("Spider-man", 2, null);
+			var inhabitant2 = new Inhabitant("Batman", 2, null);
+			forest.Place(inhabitant1, 11, 7);
+			forest.Place(inhabitant2, 11, 6);
+			var aim = new Point(14, 14);
 			var view = new ForestView(new BasicDrawer());
 			//FindPath(forest, inhabitant, view);
-			FindPathWithSmartAi(1, forest, inhabitant, aim, view);
+			FindPathWithSmartAi(1, forest, new [] {inhabitant1, inhabitant2}, aim, view);
 		}
 
 		private static void FindPath(Forest forest, Inhabitant inhabitant, ForestView view)
@@ -31,7 +34,7 @@ namespace Visualizer
 			Console.ReadKey();
 		}
 
-		private static Terrain[][] GetVisibleArea(int warFog, Point location, Forest forest)
+		private static Terrain[][] GetVisibleArea(int warFog, Point location, Inhabitant[] inhabitants, Forest forest)
 		{
 			var forestDimensions = new Point(forest.Area[0].Length, forest.Area.Length);
 			var result = new Terrain[warFog * 2 + 1][];
@@ -43,52 +46,54 @@ namespace Visualizer
 			var xMax = Math.Min(forestDimensions.X - 1, location.X + warFog);
 			for (var y = yMin; y <= yMax; y++)
 				for (var x = xMin; x <= xMax; x++)
+				{
 					result[warFog + y - location.Y][warFog + x - location.X] = forest.Area[y][x];
+					foreach (var inhabitant in inhabitants)
+						if (inhabitant.Location.Equals(new Point(x, y)) 
+								&& ! inhabitant.Location.Equals(location))
+							result[warFog + y - location.Y][warFog + x - location.X] = new PathOrTrap();
+				}
 			return result;
 		}
 
-		private static void FindPathWithSmartAi(int warFog, Forest forest, Inhabitant inhabitant, Point aim, ForestView view)
+		private static bool SomeoneReachedAim(Inhabitant[] inhabitants, Point aim)
 		{
-			var ai = new SmartAi(
-				inhabitant, 
-				aim,
-				new Point(forest.Area[0].Length, forest.Area.Length));
-			var visibleArea = GetVisibleArea(warFog, inhabitant.Location, forest);
-			ai.ReceiveMoveResult(visibleArea);
-			while (! inhabitant.Location.Equals(aim))
-			{
-				view.Repaint(forest, new[] { inhabitant });
-				Thread.Sleep(20);
-				var direction = ai.MakeStep();
-				forest.Move(inhabitant, direction);
-				visibleArea = GetVisibleArea(warFog, inhabitant.Location, forest);
-				ai.ReceiveMoveResult(visibleArea);
-				if (inhabitant.Health <= 0)
-				{
-					Console.WriteLine("Dead!");
-					break;
-				}
-			}
-			Console.ReadKey();
+			foreach (var inhabitant in inhabitants)
+				if (inhabitant.Location.Equals(aim))
+					return true;
+			return false;
 		}
 
-		static void ControlLoop(Forest forest, Inhabitant inhabitant, ForestView view)
+		private static void FindPathWithSmartAi(int warFog, Forest forest, Inhabitant[] inhabitants, Point aim, ForestView view)
 		{
-			var loop = true;
-			var actions = new Dictionary<ConsoleKey, Action>()
-            {
-                { ConsoleKey.UpArrow, () => forest.Move(inhabitant, Direction.Up) },
-                { ConsoleKey.DownArrow, () => forest.Move(inhabitant, Direction.Down) },
-                { ConsoleKey.LeftArrow, () => forest.Move(inhabitant, Direction.Left) },
-                { ConsoleKey.RightArrow, () => forest.Move(inhabitant, Direction.Right) },
-                { ConsoleKey.Escape, () => { loop = false; } }
-            };
-			while (loop)
+			var ais = inhabitants
+				.Select(z => new SmartAi(
+					z, 
+					aim,
+					new Point(forest.Area[0].Length, forest.Area.Length)))
+				.ToArray();
+			var visibleAreas = inhabitants
+				.Select(z =>GetVisibleArea(warFog, z.Location, inhabitants, forest))
+				.ToArray();
+			for (var i = 0; i < inhabitants.Length; i++)
+				ais[i].ReceiveMoveResult(visibleAreas[i]);
+			while (! SomeoneReachedAim(inhabitants, aim))
 			{
-				view.Repaint(forest, new[] { inhabitant });
-				var key = Console.ReadKey().Key;
-				actions[key]();
+				for (var i = 0; i < inhabitants.Length; i++)
+					if (inhabitants[i].Health >= 0)
+					{
+						view.Repaint(forest, inhabitants);
+						Thread.Sleep(20);
+						var direction = ais[i].MakeStep();
+						forest.Move(inhabitants[i], direction);
+						if (inhabitants[0].Location.Equals(inhabitants[1].Location))
+						{
+						}
+						var visibleArea = GetVisibleArea(warFog, inhabitants[i].Location, inhabitants, forest);
+						ais[i].ReceiveMoveResult(visibleArea);
+					}
 			}
+			Console.ReadKey();
 		}
 	}
 }

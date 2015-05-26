@@ -20,11 +20,8 @@ namespace ForestInhabitants
 		private HashSet<Point> PointsOfHighInterest;
 		private Point _subAim = null;
 
-<<<<<<< HEAD
 		private const int LifeNeighborhood = 3;
-=======
-		private int LifeNeighborhood = 2;
->>>>>>> Json
+
 		private bool OnMovingToLife = false;
 		private Point _lifeAim = null; //life aim can leave
 		private List<Point> CurrentPath;
@@ -238,6 +235,9 @@ namespace ForestInhabitants
 				}
 			}
 			StepIndex++;
+			if (_area[CurrentPath[StepIndex].Y][CurrentPath[StepIndex].X].Name == "PathOrTrap")
+			{
+			}
 			return Forest.Directions[CurrentPath[StepIndex].Substract(CurrentPath[StepIndex - 1])];
 		}
 
@@ -251,12 +251,13 @@ namespace ForestInhabitants
 					var xOnArea = _inhabitant.Location.X - warFog + x;
 					if (InsideArea(xOnArea, yOnArea))
 					{
-						if (_area[yOnArea][xOnArea] == null)
+						_area[yOnArea][xOnArea] = visibleArea[y][x];
+						/*if (_area[yOnArea][xOnArea] == null)
 							_area[yOnArea][xOnArea] = visibleArea[y][x];
 						if (_area[yOnArea][xOnArea].Name == "PathOrTrap")
 							_area[yOnArea][xOnArea] = visibleArea[y][x];
 						if (_area[yOnArea][xOnArea].Name == "Life")
-							_area[yOnArea][xOnArea] = visibleArea[y][x];
+							_area[yOnArea][xOnArea] = visibleArea[y][x];*/
 					}
 				}
 		}
@@ -301,7 +302,6 @@ namespace ForestInhabitants
 
 		public void ReceiveMoveResult(Terrain[][] visibleArea)
 		{
-		    LifeNeighborhood = visibleArea.GetLength(0) / 2;
 			UpdateArea(visibleArea);
 			UpdatePointsOfInterest(visibleArea);
 		}
