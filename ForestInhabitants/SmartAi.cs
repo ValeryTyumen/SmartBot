@@ -20,7 +20,11 @@ namespace ForestInhabitants
 		private HashSet<Point> PointsOfHighInterest;
 		private Point _subAim = null;
 
+<<<<<<< HEAD
 		private const int LifeNeighborhood = 3;
+=======
+		private int LifeNeighborhood = 2;
+>>>>>>> Json
 		private bool OnMovingToLife = false;
 		private Point _lifeAim = null; //life aim can leave
 		private List<Point> CurrentPath;
@@ -297,6 +301,7 @@ namespace ForestInhabitants
 
 		public void ReceiveMoveResult(Terrain[][] visibleArea)
 		{
+		    LifeNeighborhood = visibleArea.GetLength(0) / 2;
 			UpdateArea(visibleArea);
 			UpdatePointsOfInterest(visibleArea);
 		}

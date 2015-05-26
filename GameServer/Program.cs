@@ -19,8 +19,8 @@ namespace GameServer
 		private static readonly int MaxInhabitantCount = 2;
 		private static object _locker = new object();
 
-		private static List<CellChange> _cellChanges;
-		private static List<PlayerStateChange> _playerStateChanges;
+		private static List<Tuple<Point, int>> _cellChanges;
+		private static List<Tuple<int, Point, int>> _playerStateChanges;
 
 		private static List<RemotePlayer> _players;
 
@@ -47,8 +47,8 @@ namespace GameServer
 
 		static void Main(string[] args)
 		{
-			_cellChanges = new List<CellChange>();
-			_playerStateChanges = new List<PlayerStateChange>();
+			_cellChanges = new List<Tuple<Point, int>>();
+			_playerStateChanges = new List<Tuple<int, Point, int>>();
 			var config = ForestConfigLoader.Load();
 			_forest = ForestLoader.Load(config.ForestSource);
 			_aim = config.Aim;
@@ -76,10 +76,10 @@ namespace GameServer
 
 		private static void WriteWorldInfo(Socket socket)
 		{
-			var map = new TerrainType[_forest.Area.Length, _forest.Area[0].Length];
+			var map = new int[_forest.Area.Length, _forest.Area[0].Length];
 			for (var i = 0; i < _forest.Area.Length; i++)
 				for (var j = 0; j < _forest.Area[0].Length; j++)
-					map[i, j] = TerrainCode[_forest.Area[i][j].Name];
+					map[i, j] = (int)TerrainCode[_forest.Area[i][j].Name];
 			var worldInfo = new WorldInfo
 			{
 				Players = Enumerable
@@ -93,7 +93,7 @@ namespace GameServer
 					.ToArray(),
 				Map = map
 			};
-			Bson.Write(socket, worldInfo);
+			Json.Write(socket, worldInfo);
 		}
 
 		#endregion
@@ -162,7 +162,7 @@ namespace GameServer
 			_visualizerSocket.Close();
 			foreach (var player in _players)
 			{
-				Bson.Write(player.Socket, new MoveResultInfo { Result = 2 });
+				Json.Write(player.Socket, new MoveResultInfo { Result = 2 });
 				player.Socket.Close();
 			}
 		}
@@ -174,7 +174,7 @@ namespace GameServer
 				Answer answer;
 				try
 				{
-					answer = Bson.Read<Answer>(socket);
+					answer = Json.Read<Answer>(socket);
 				} catch { break; }
 				if (answer.AnswerCode == 0)
 				{
@@ -184,8 +184,8 @@ namespace GameServer
 						lastMoveInfo = new LastMoveInfo
 						{
 							GameOver = GameOver,
-							CellChanges = _cellChanges.ToArray(),
-							PlayerStateChanges = _playerStateChanges.ToArray()
+							ChangedCells = _cellChanges.ToArray(),
+							PlayersChangedPosition = _playerStateChanges.ToArray()
 						};
 						_cellChanges.Clear();
 						_playerStateChanges.Clear();
@@ -194,7 +194,7 @@ namespace GameServer
 						OnGameOver();
 					try
 					{
-						Bson.Write(socket, lastMoveInfo);
+						Json.Write(socket, lastMoveInfo);
 					} catch { break; }
 				}
 				else
@@ -211,7 +211,7 @@ namespace GameServer
 			while (_visualizerSocket == null || _players.Count < MaxInhabitantCount)
 			{
 				var socket = listener.AcceptSocket();
-				var hello = Bson.Read<Hello>(socket);
+				var hello = Json.Read<Hello>(socket);
 				Console.WriteLine("New connection: {0}, isVisualizer: {1}", socket.RemoteEndPoint, hello.IsVisualizator);
 				if (hello.IsVisualizator)
 					AddVisualizer(socket);

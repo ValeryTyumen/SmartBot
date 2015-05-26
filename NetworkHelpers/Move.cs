@@ -4,6 +4,6 @@ namespace NetworkHelpers
 {
 	public class Move
 	{
-		public Direction Direction;
+		public int Direction;
 	}
 }

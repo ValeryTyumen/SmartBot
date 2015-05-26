@@ -32,15 +32,15 @@ namespace VisualizerClient
 				Thread.Sleep(50);
 				try
 				{
-					Bson.Write(socket, new Answer { AnswerCode = 0 });
+					Json.Write(socket, new Answer { AnswerCode = 0 });
 				} catch { break; }
-				var lastMoveInfo = Bson.Read<LastMoveInfo>(socket);
-				foreach (var change in lastMoveInfo.CellChanges)
-					_forest.Area[change.Location.Y][change.Location.X] = _factories[change.Type].Create();
-				foreach (var change in lastMoveInfo.PlayerStateChanges)
+				var lastMoveInfo = Json.Read<LastMoveInfo>(socket);
+				foreach (var change in lastMoveInfo.ChangedCells)
+					_forest.Area[change.Item1.Y][change.Item1.X] = _factories[(TerrainType)change.Item2].Create();
+				foreach (var change in lastMoveInfo.PlayersChangedPosition)
 				{
-					_inhabitants[change.Id].Health = change.Hp;
-					_inhabitants[change.Id].Location = change.Location;
+					_inhabitants[change.Item1].Health = change.Item3;
+					_inhabitants[change.Item1].Location = change.Item2;
 				}
 				if (lastMoveInfo.GameOver)
 					break;

@@ -11,17 +11,4 @@ namespace NetworkHelpers
 		public bool IsVisualizator;
 		public string Name;
 	}
-
-	/*	public class Point
-	{
-		public Point(int x, int y)
-		{
-			X = x;
-			Y = y;
-		}
-
-		public int X;
-		public int Y;
-	}
-*/
 }

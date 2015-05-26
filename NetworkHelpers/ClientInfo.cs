@@ -8,6 +8,6 @@ namespace NetworkHelpers
 		public int Hp;
 		public Point StartPosition;
 		public Point Target;
-		public TerrainType[,] VisibleMap; // видимая часть карты в начале игры.
+		public int[,] VisibleMap; // видимая часть карты в начале игры.
 	}
 }

@@ -51,8 +51,8 @@ namespace VisualizerClient
 			Console.WriteLine("Connected to server.");
 			_view = new ForestView(new BasicDrawer());
 			var socket = client.Client;
-			Bson.Write(socket, new Hello {IsVisualizator = true});
-			var worldInfo = Bson.Read<WorldInfo>(socket);
+			Json.Write(socket, new Hello {IsVisualizator = true});
+			var worldInfo = Json.Read<WorldInfo>(socket);
 			_inhabitants = new List<Inhabitant>();
 			foreach (var player in worldInfo.Players)
 			{
@@ -64,7 +64,7 @@ namespace VisualizerClient
 				.Range(0, worldInfo.Map.GetLength(0))
 				.Select(i => Enumerable
 					.Range(0, worldInfo.Map.GetLength(1))
-					.Select(j => _factories[worldInfo.Map[i, j]].Create())
+					.Select(j => _factories[(TerrainType)worldInfo.Map[i, j]].Create())
 					.ToArray())
 				.ToArray();
 			_forest = new Forest(area);

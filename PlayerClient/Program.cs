@@ -39,7 +39,7 @@ namespace PlayerClient
 			}
 			Console.WriteLine("Connected to server.");
 			var socket = client.Client;
-			Bson.Write(socket, new Hello
+			Json.Write(socket, new Hello
 			{
 				IsVisualizator = false,
 				Name = nickname
