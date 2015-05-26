@@ -10,12 +10,12 @@ namespace Visualizer
 		static void Main(string[] args)
 		{
 			var forest = ForestLoader.Load("forest.txt");
-			var inhabitant = new Inhabitant("Spider-man");
+			var inhabitant = new Inhabitant("Spider-man", 3, null);
 			forest.Place(inhabitant, 1, 1);
 			var aim = new Point(28, 26);
 			var view = new ForestView(new BasicDrawer());
 			//FindPath(forest, inhabitant, view);
-			FindPathWithSmartAi(2, forest, inhabitant, aim, view);
+			FindPathWithSmartAi(1, forest, inhabitant, aim, view);
 		}
 
 		private static void FindPath(Forest forest, Inhabitant inhabitant, ForestView view)

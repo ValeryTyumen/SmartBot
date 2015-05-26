@@ -20,7 +20,7 @@ namespace ForestInhabitants
 		private HashSet<Point> PointsOfHighInterest;
 		private Point _subAim = null;
 
-		private const int LifeNeighborhood = 2;
+		private const int LifeNeighborhood = 3;
 		private bool OnMovingToLife = false;
 		private Point _lifeAim = null; //life aim can leave
 		private List<Point> CurrentPath;
@@ -165,7 +165,7 @@ namespace ForestInhabitants
 			}, n => false);
 			for (int y = _inhabitant.Location.Y - LifeNeighborhood; y <= _inhabitant.Location.Y + LifeNeighborhood; y++)
 				for (int x = _inhabitant.Location.X - LifeNeighborhood; x <= _inhabitant.Location.X + LifeNeighborhood; x++)
-					if (InsideArea(x, y) && _area[y][x].Name == "Life" && parents.ContainsKey(new Point(x, y)))
+					if (InsideArea(x, y) && _area[y][x] != null && _area[y][x].Name == "Life" && parents.ContainsKey(new Point(x, y)))
 						return GetPathFromParents(new Point(x, y), parents);
 			return null;
 		}
