@@ -249,9 +249,9 @@ namespace ForestInhabitants
 					{
 						if (_area[yOnArea][xOnArea] == null)
 							_area[yOnArea][xOnArea] = visibleArea[y][x];
-						if (_area[yOnArea][xOnArea].Name == "PathOrTrap")
+						else if (_area[yOnArea][xOnArea].Name == "PathOrTrap")
 							_area[yOnArea][xOnArea] = visibleArea[y][x];
-						if (_area[yOnArea][xOnArea].Name == "Life")
+						else if (_area[yOnArea][xOnArea].Name == "Life")
 							_area[yOnArea][xOnArea] = visibleArea[y][x];
 					}
 				}
