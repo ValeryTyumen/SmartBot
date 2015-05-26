@@ -52,7 +52,8 @@ namespace PlayerClient
 					inhabitant.Location = inhabitant.Location.Add(Forest.Movings[direction]);
 				if (moveResultInfo.Result == 2)
 					break;
-				Console.WriteLine("Went to {0}, result: {1}", direction, moveResultInfo.Result);
+                ai.ReceiveMoveResult(Convert(moveResultInfo.VisibleMap));
+                Console.WriteLine("Went to {0}, result: {1}", direction, moveResultInfo.Result);
 			}
 		}
 	}
