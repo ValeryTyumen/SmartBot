@@ -40,8 +40,11 @@ namespace PlayerClient
 			var inhabitant = new Inhabitant(nickname, clientInfo.Hp, clientInfo.StartPosition);
 			IAi ai = new SmartAi(inhabitant, clientInfo.Target, clientInfo.MapSize);
 			ai.ReceiveMoveResult(Convert(clientInfo.VisibleMap));
+		    var playerState = 0;
 			while (true)
 			{
+                if (playerState == 1)
+                    continue;
 				var direction = ai.MakeStep();
                 if (direction != Direction.Stay)
 				    Json.Write(socket, new Move
@@ -49,6 +52,7 @@ namespace PlayerClient
 					    Direction = (int)direction
 				    });
 				var moveResultInfo = Json.Read<MoveResultInfo>(socket);
+			    playerState = moveResultInfo.Result;
 				if (moveResultInfo.Result == 0)
 					inhabitant.Location = inhabitant.Location.Add(Forest.Movings[direction]);
 				if (moveResultInfo.Result == 2)
