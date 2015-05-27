@@ -43,10 +43,11 @@ namespace PlayerClient
 			while (true)
 			{
 				var direction = ai.MakeStep();
-				Json.Write(socket, new Move
-				{
-					Direction = (int)direction
-				});
+                if (direction != Direction.Stay)
+				    Json.Write(socket, new Move
+				    {
+					    Direction = (int)direction
+				    });
 				var moveResultInfo = Json.Read<MoveResultInfo>(socket);
 				if (moveResultInfo.Result == 0)
 					inhabitant.Location = inhabitant.Location.Add(Forest.Movings[direction]);
