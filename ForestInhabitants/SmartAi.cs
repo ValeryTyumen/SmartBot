@@ -121,7 +121,8 @@ namespace ForestInhabitants
 				foreach (var neighbor in GetNeighbors(current.Item1, p => 
 					_area[p.Y][p.X] != null 
 					&& _area[p.Y][p.X].Name != "Bush" 
-					&& _area[p.Y][p.X].Name != "PathOrTrap"))
+					//&& _area[p.Y][p.X].Name != "PathOrTrap"
+					))
 				{
 					var trapsPassed = current.Item2;
 					if (_area[neighbor.Y][neighbor.X].Name == "Trap")
@@ -184,8 +185,8 @@ namespace ForestInhabitants
 			{
 				var terrain = _area[v.Y][v.X];
 				return terrain != null
-				       && terrain.Name != "Bush"
-				       && terrain.Name != "PathOrTrap";
+				       && terrain.Name != "Bush";
+				//&& terrain.Name != "PathOrTrap";
 			}, v => false);
 			if (PointsOfHighInterest.Count != 0)
 				foreach (var point in PointsOfHighInterest.OrderBy(z => Point.GetManhattanDistance(_aim, z)))
@@ -205,6 +206,7 @@ namespace ForestInhabitants
 			{
 				if (! CurrentPath[StepIndex].Equals(_inhabitant.Location))
 				{
+					_subAim = null;
 				}
 			}
 			if (_lifeAim != null)
@@ -223,8 +225,7 @@ namespace ForestInhabitants
 			}
 			if (_lifeAim == null)
 			{
-				if (_subAim == null || _inhabitant.Location.Equals(_subAim) 
-					|| _area[CurrentPath[StepIndex + 1].Y][CurrentPath[StepIndex + 1].X].Name == "PathOrTrap")
+				if (_subAim == null || _inhabitant.Location.Equals(_subAim))
 				{
 					_subAim = ChooseSubAim();
 					if (_subAim == null)
@@ -232,11 +233,10 @@ namespace ForestInhabitants
 					CurrentPath = FindShortestPathWithMinTraps(_inhabitant.Location, _subAim); //can create mistake
 					StepIndex = 0;
 				}
+				if (_subAim != null && _area[CurrentPath[StepIndex + 1].Y][CurrentPath[StepIndex + 1].X].Name == "PathOrTrap")
+					return Direction.Stay;
 			}
 			StepIndex++;
-			if (_area[CurrentPath[StepIndex].Y][CurrentPath[StepIndex].X].Name == "PathOrTrap")
-			{
-			}
 			return Forest.Directions[CurrentPath[StepIndex].Substract(CurrentPath[StepIndex - 1])];
 		}
 
